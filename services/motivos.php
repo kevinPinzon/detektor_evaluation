@@ -28,6 +28,9 @@ class Motivos
 			case 'update':
 				echo $this->updateMotivos($id, $_GET['des_motivo'], $_GET['estado'], $_GET['tipo']);
 				break;
+			case 'delete':
+				echo $this->deleteMotivos($id);
+				break;
     		default:
     			echo "Bad Request";
     			break;
@@ -77,6 +80,21 @@ class Motivos
 			$query->bindParam(':_desmotivo', $des_motivo, PDO::PARAM_STR);
 			$query->bindParam(':_estado', $estado, PDO::PARAM_STR);
 			$query->bindParam(':_tipo', $tipo, PDO::PARAM_STR);
+			$query->execute();
+			$this->con->close_con();
+			$q= $query->fetchAll(PDO::FETCH_OBJ);
+			echo json_encode($q);
+		} catch(PDOException $e) {
+			echo json_encode($e->getMessage()); 
+		}
+	}
+
+	private function deleteMotivos($id)
+	{
+		try{
+			$str='DELETE FROM  motivos_es_gt WHERE motivo = :_id;';
+			$query = $this->con->prepare($str);
+			$query->bindParam(':_id', $id, PDO::PARAM_INT);
 			$query->execute();
 			$this->con->close_con();
 			$q= $query->fetchAll(PDO::FETCH_OBJ);

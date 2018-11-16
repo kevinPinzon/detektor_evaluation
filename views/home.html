@@ -1,26 +1,7 @@
 <div class="container">
     <div class="jumbotron">
 
-        <div class="card bg-secondary mb-12" >
-            <div class="card-header">Insertar nuevo elemento</div>
-            <div class="card-body">
-                    <div class="form-group has-success">
-                        <label class="form-control-label" for="inputSuccess1">Motivo</label>
-                        <input type="number" class="form-control is-valid" id="item_motivo">
-
-                        <label class="form-control-label" for="inputSuccess1">Des motivo</label>
-                        <input type="text" class="form-control is-valid" id="item_des_motivo">
-
-                        <label class="form-control-label" for="inputSuccess1">Estado</label>
-                        <input type="text" class="form-control is-valid" id="item_estado">
-
-                        <label class="form-control-label" for="inputSuccess1">Tipo</label>
-                        <input type="text" class="form-control is-valid" id="item_tipo">
-                    </div>
-                <button type="button" class="btn btn-success" ng-click="insertNewItem();">Guardar</button>
-            </div>
-        </div>
-
+        <button type="button" class="btn btn-success" ng-click="show_insertMolda();">insertar nuevo elemento</button>
         <br><br>
 
         <table id="motivos" class="display table table-striped table-hover" >
@@ -41,7 +22,7 @@
                     <td> {{obj.tipo}} </td>
                     <td> 
                         <span style="cursor:pointer;" class="badge badge-pill badge-warning" ng-click="show_update_modal(obj);">Editar</span>
-                        <span style="cursor:pointer;" class="badge badge-pill badge-danger">Borrar</span>
+                        <span style="cursor:pointer;" class="badge badge-pill badge-danger" ng-click="show_removeModal(obj);" >Borrar</span>
                     </td>
                 </tr>
             </tbody>
@@ -79,6 +60,58 @@
                     </div>
                 </div>
             </div>
+
+            <div id="insert_modal" class="modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Insertar Nuevo Elemento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+    
+                                <div class="form-group has-success">
+                                        <label class="form-control-label" for="inputSuccess1">Motivo</label>
+                                        <input type="number" class="form-control is-valid" id="item_motivo">
+                
+                                        <label class="form-control-label" for="inputSuccess1">Des motivo</label>
+                                        <input type="text" class="form-control is-valid" id="item_des_motivo">
+                
+                                        <label class="form-control-label" for="inputSuccess1">Estado</label>
+                                        <input type="text" class="form-control is-valid" id="item_estado">
+                
+                                        <label class="form-control-label" for="inputSuccess1">Tipo</label>
+                                        <input type="text" class="form-control is-valid" id="item_tipo">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" ng-click="insertNewItem();" data-dismiss="modal">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="remove_modal" class="modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Borar Elemento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>¿Está seguro de querer eliminar este elemento?</p>                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" ng-click="deleteItem()" data-dismiss="modal">Borrar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
   </div>
 </div>

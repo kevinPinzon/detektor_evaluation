@@ -23,7 +23,7 @@
                 id: -1,
                 action: 'get'
             }).then(function(results){
-                console.log("RESULTADOS",results);
+                console.log("RESULTADOS",results);                
                 $scope.tableResults = results;
             });
         }
@@ -61,6 +61,16 @@
             $('#update_modal').modal('show');
         }
 
+        $scope.show_insertMolda = function(item){
+            $scope.item_motivo = item;
+            $('#insert_modal').modal('show');
+        }
+
+        $scope.show_removeModal = function(item){
+            $scope.item_motivo = item;
+            $('#remove_modal').modal('show');
+        }
+
         $scope.updateItem = function(){
             
             Data.get('motivos',{
@@ -70,9 +80,22 @@
                 tipo: $('#edit_item_tipo').val(),
                 action: 'update'
             }).then(function(results){
+                //$scope.tableResults = [];
+                //getAllData();
+                //$('#motivos').DataTable();
+                location.reload();
+            });
+        }
+
+        $scope.deleteItem = function(){
             
-                getAllData();
-                $('#motivos').DataTable();
+            Data.get('motivos',{
+                id: $scope.item_motivo.motivo,
+                action: 'delete'
+            }).then(function(results){        
+                //$scope.tableResults = []; 
+                //getAllData();
+                //$('#motivos').DataTable();
                 location.reload();
             });
         }
