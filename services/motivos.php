@@ -47,7 +47,23 @@ class Motivos
 		}
 	}
 
-	
+	private function insertMotivos($id, $des_motivo, $estado, $tipo)
+	{
+		try{
+			$str='INSERT INTO motivos_es_gt (motivo,des_motivo,estado,tipo) values (:_id,:_desmotivo,:_estado,:_tipo);';
+			$query = $this->con->prepare($str);
+			$query->bindParam(':_id', $id, PDO::PARAM_INT);
+			$query->bindParam(':_desmotivo', $des_motivo, PDO::PARAM_STR);
+			$query->bindParam(':_estado', $estado, PDO::PARAM_STR);
+			$query->bindParam(':_tipo', $tipo, PDO::PARAM_STR);
+			$query->execute();
+			$this->con->close_con();
+			$q= $query->fetchAll(PDO::FETCH_OBJ);
+			echo json_encode($q);
+		} catch(PDOException $e) {
+			echo json_encode($e->getMessage()); 
+		}
+	}
 }
 $P = new Motivos();
 ?>

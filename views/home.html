@@ -1,7 +1,27 @@
 <div class="container">
     <div class="jumbotron">
 
-        
+        <div class="card bg-secondary mb-12" >
+            <div class="card-header">Insertar nuevo elemento</div>
+            <div class="card-body">
+                    <div class="form-group has-success">
+                        <label class="form-control-label" for="inputSuccess1">Motivo</label>
+                        <input type="number" class="form-control is-valid" id="item_motivo">
+
+                        <label class="form-control-label" for="inputSuccess1">Des motivo</label>
+                        <input type="text" class="form-control is-valid" id="item_des_motivo">
+
+                        <label class="form-control-label" for="inputSuccess1">Estado</label>
+                        <input type="text" class="form-control is-valid" id="item_estado">
+
+                        <label class="form-control-label" for="inputSuccess1">Tipo</label>
+                        <input type="text" class="form-control is-valid" id="item_tipo">
+                    </div>
+                <button type="button" class="btn btn-success" ng-click="insertNewItem();">Guardar</button>
+            </div>
+        </div>
+
+        <br><br>
 
         <table id="motivos" class="display table table-striped table-hover" >
             <thead>
