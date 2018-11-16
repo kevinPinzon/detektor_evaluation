@@ -7,11 +7,33 @@
 
     function InicioController($scope,$stateParams,Data)
 	{
+        // var $ = require( 'jquery' );
+        // require( 'datatables.net' )( window, $ );
         
-        $scope.title = "Table: motivos_es_gt";
+        // $(document).ready(function() {            
+        //     $('#motivos').DataTable();
+        // } );
+
+        setTimeout(function () {
+            $(function () {
+              $('#motivos').DataTable();
+            });
+          }, 500);
+
         //var Id = $stateParams.id;
 
-        
+        getAllData();
+
+        function getAllData(){
+            Data.get('motivos',{
+                id: -1,
+                action: 'get'
+            }).then(function(results){
+                console.log("RESULTADOS",results);
+                $scope.tableResults = results;
+            });
+        }
+
     }
     
 })();
