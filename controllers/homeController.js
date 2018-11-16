@@ -28,7 +28,7 @@
             });
         }
         
-        $scope.insertNewItem = function(){            
+        $scope.insertNewItem = function(){
             
             Data.get('motivos',{
                 id: $('#item_motivo').val(),
@@ -44,11 +44,39 @@
                     tipo: $('#item_tipo').val()
                 }
                 $scope.tableResults.push(obj);
-                console.log("RESULTADOS UPDATED",$scope.tableResults);
-                //getAllData();
+
+                $('#motivos').DataTable();
+
+                $('#item_motivo').val("");
+                $('#item_des_motivo').val("");
+                $('#item_estado').val("");
+                $('#item_tipo').val("");
+
+                //location.reload();
             });
         }
 
+        $scope.show_update_modal = function(item){
+            $scope.item_motivo = item;
+            $('#update_modal').modal('show');
+        }
+
+        $scope.updateItem = function(){
+            
+            Data.get('motivos',{
+                id: $('#edit_item_motivo').val(),
+                des_motivo: $('#edit_item_des_motivo').val(),
+                estado: $('#edit_item_estado').val(),
+                tipo: $('#edit_item_tipo').val(),
+                action: 'update'
+            }).then(function(results){
+            
+                getAllData();
+                $('#motivos').DataTable();
+                location.reload();
+            });
+        }
+        
     }
     
 })();

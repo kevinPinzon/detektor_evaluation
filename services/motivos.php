@@ -25,6 +25,9 @@ class Motivos
 			case 'insert':
 				echo $this->insertMotivos($id, $_GET['des_motivo'], $_GET['estado'], $_GET['tipo']);
 				break;
+			case 'update':
+				echo $this->updateMotivos($id, $_GET['des_motivo'], $_GET['estado'], $_GET['tipo']);
+				break;
     		default:
     			echo "Bad Request";
     			break;
@@ -51,6 +54,24 @@ class Motivos
 	{
 		try{
 			$str='INSERT INTO motivos_es_gt (motivo,des_motivo,estado,tipo) values (:_id,:_desmotivo,:_estado,:_tipo);';
+			$query = $this->con->prepare($str);
+			$query->bindParam(':_id', $id, PDO::PARAM_INT);
+			$query->bindParam(':_desmotivo', $des_motivo, PDO::PARAM_STR);
+			$query->bindParam(':_estado', $estado, PDO::PARAM_STR);
+			$query->bindParam(':_tipo', $tipo, PDO::PARAM_STR);
+			$query->execute();
+			$this->con->close_con();
+			$q= $query->fetchAll(PDO::FETCH_OBJ);
+			echo json_encode($q);
+		} catch(PDOException $e) {
+			echo json_encode($e->getMessage()); 
+		}
+	}
+
+	private function updateMotivos($id, $des_motivo, $estado, $tipo)
+	{
+		try{
+			$str='UPDATE motivos_es_gt SET des_motivo = :_desmotivo ,estado = :_estado ,tipo = :_tipo WHERE motivo = :_id;';
 			$query = $this->con->prepare($str);
 			$query->bindParam(':_id', $id, PDO::PARAM_INT);
 			$query->bindParam(':_desmotivo', $des_motivo, PDO::PARAM_STR);
